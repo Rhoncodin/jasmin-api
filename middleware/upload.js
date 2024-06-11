@@ -29,10 +29,10 @@ const imageFilter = (req, file, cb) => {
     file.mimetype === 'image/jpeg'
   ) {
     const fileSize = parseInt(req.headers['content-length']);
-    if (fileSize <= 2000000) {
+    if (fileSize <= 5000000) {
       cb(null, true);
     } else {
-      req.fileValidationError = new Error('Ukuran foto harus kurang dari 2MB');
+      req.fileValidationError = new Error('Ukuran foto harus kurang dari 5MB');
       cb(null, false);
     }
   } else {
@@ -43,7 +43,7 @@ const imageFilter = (req, file, cb) => {
 
 const uploadImage = multer({
   storage: storage,
-  limits: { fileSize: 2000000 },
+  limits: { fileSize: 5000000 },
   fileFilter: imageFilter,
 }).single('image');
 
